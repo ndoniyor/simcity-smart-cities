@@ -6,9 +6,11 @@ numpy @ file:///Users/runner/miniforge3/conda-bld/numpy_1694920094885/work/dist/
 pandas @ file:///Users/runner/miniforge3/conda-bld/pandas_1696030215465/work
 pipreqs==0.4.13
 python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1626286286081/work
+python-dotenv @ file:///home/conda/feedstock_root/build_artifacts/python-dotenv-split_1693865766170/work
 pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1693930252784/work
 requests==2.31.0
 six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
+sodapy==2.2.0
 tzdata @ file:///home/conda/feedstock_root/build_artifacts/python-tzdata_1680081134351/work
 urllib3==2.0.5
 yarg==0.1.9
