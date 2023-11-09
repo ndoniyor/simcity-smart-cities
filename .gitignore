@@ -3,3 +3,8 @@
 *.xlsx
 .DS_Store
 __pycache__
+pyenv.cfg
+
+simcity_env/
+src/data_collection/*.ipynb
+src/data_processing/clean_311.ipynb

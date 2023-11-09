@@ -1,28 +1,28 @@
 # ESE 440 Senior Design Project - Smart Cities
 
-This project focuses on analyzing data from the city of New York to derive insights on various city services, using datasets fetched via the sodapy API. Analyses are performed using Python libraries such as `pandas`, `numpy`, and `matplotlib`.
+This project focuses on analyzing data from the city of New York to derive insights on various city services, using datasets fetched via the sodapy API. Analyses are performed using Python libraries such as `pandas`, `geopandas`, `numpy`, and `matplotlib`.
 
 ## Getting Started
 * Clone repository
 * Make sure you're in the repository base directory
-* Make sure Conda is installed
-* Create conda environment from environment.yml:
+* Create Python Virtual Environment
 ```
-conda env create -f environment.yml
+python3 -m venv simcity_env
 ```
 * Now activate the environment with
 ```
-conda activate simcity
+source ./simcity_env/bin/activate
 ```
-If this doesn't work try
+* Now install dependencies with:
 ```
-source activate simcity
+pip install -r requirements.txt
 ```
+
 ## Gathering data
-Currently only one data script exists so to run that:
+Scripts to pull data are located in `src/data_collection/`:
 * `cd` into `./src/data_collection/`
 * Run the following:
 ```
-python nyc_311.py
+python <name_of_script>.py
 ```
-* This will pull the data and put it into a csv file in `./data/raw/nyc_data.csv`
+* This will pull the data and put it into a csv file in `data/raw/`
