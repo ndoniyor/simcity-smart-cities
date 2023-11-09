@@ -26,22 +26,25 @@ class DataCollector:
 
         select_str = ", ".join(select) if select else "*"
 
-        while True:
-            print(f"{offset} records")
-            page_results = client.get(
-                self.endpoint,
-                where=query if query else None,
-                select=select_str if select else None,
-                limit=limit,
-                offset=offset,
-            )
+        try:
+            while True:
+                print(f"{offset} records")
+                page_results = client.get(
+                    self.endpoint,
+                    where=query if query else None,
+                    select=select_str if select else None,
+                    limit=limit,
+                    offset=offset,
+                )
 
-            if not page_results:
-                break
+                if not page_results:
+                    break
 
-            dfs.append(DataFrame(page_results))
-            offset += limit
-        self.df = concat(dfs, ignore_index=True)
+                dfs.append(DataFrame(page_results))
+                offset += limit
+            self.df = concat(dfs, ignore_index=True)
+        except ValueError as error:
+            print("Could not find any files")
 
     def read_data(self, name) -> None:
         file_path = CSV_FILE_PATH + name + ".csv"
