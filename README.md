@@ -56,6 +56,7 @@ python <name_of_script>.py
 
 The data here needs to be aligned, so that we can validate user requests against the government provided data
 Currently aligned data:
-
-- General 311 requests (pothole requests only) : Pothole work orders | `src/data_processing/align_pothole.ipynb`
-- Housing code complaints : Housing code violations | `src/data_processing/align_housing_code.ipynb`
+| Base set | Validation set | Alignment File|
+|--|--|--|
+|General 311 requests (pothole requests only) | Pothole work orders | `src/data_processing/align_pothole.ipynb`|
+|Housing code complaints | Housing code violations | `src/data_processing/align_housing_code.ipynb`|
