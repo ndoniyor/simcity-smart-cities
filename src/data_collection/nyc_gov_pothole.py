@@ -10,8 +10,7 @@ ENDPOINT = "x9wy-ing4"
 
 
 def main():
-    yearly_queries = []
-    dfs = []
+    year_range = range(2010,2023)
 
     columns = [
         "the_geom",
@@ -19,19 +18,14 @@ def main():
         "RptClosed",
     ]
 
-    collector_pothole = DataCollector(ENDPOINT)
-
-    for year in range(2010, 2023):
-        yearly_queries.append([*create_yearly_query(year)])
-
-    for query in yearly_queries:
-        collector_pothole.collect_data(queries=query, select=columns)
-        dfs.append(collector_pothole.df)
-
-    df = pd.concat(dfs, ignore_index=True)
-    print(f"File size: {compute_filesize(df)} MB")
-
-    df.to_csv("../../data/raw/nyc_gov_pothole.csv")
+    collector_311 = DataCollector(
+        endpoint=ENDPOINT,
+        filters=[],
+        columns=columns,
+        date_col="created_date",
+    )
+    collector_311.collect_data(years=year_range)
+    collector_311.to_csv("nyc_gov_pothole.csv")
 
 
 if __name__ == "__main__":

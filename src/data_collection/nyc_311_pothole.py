@@ -2,16 +2,13 @@ import pandas as pd
 import sys
 
 sys.path.append("..")
-
 from utils.data_collector import DataCollector
-from utils.helpers import create_yearly_query, compute_filesize
 
 ENDPOINT = "erm2-nwe9"
 
 
 def main():
-    yearly_queries = []
-    dfs = []
+    year_range = range(2010, 2023)
 
     columns = [
         "unique_key",
@@ -36,26 +33,19 @@ def main():
         "longitude",
         "descriptor",
     ]
+    filters = [
+        "descriptor='Pothole'",
+        "resolution_description='The Department of Transportation inspected this complaint and repaired the problem.'",
+    ]
 
-    collector_311 = DataCollector(endpoint=ENDPOINT)
-
-    for year in range(2010, 2023):
-        yearly_queries.append(
-            [
-                "descriptor='Pothole'",
-                "resolution_description='The Department of Transportation inspected this complaint and repaired the problem.'",
-                *create_yearly_query(year, 'created_date'),
-            ]
-        )
-
-    for query in yearly_queries:
-        collector_311.collect_data(queries=query, select=columns)
-        dfs.append(collector_311.df)
-
-    df = pd.concat(dfs, ignore_index=True)
-    print(f"File size: {compute_filesize(df)} MB")
-
-    df.to_csv("../../data/raw/nyc_311_pothole.csv")
+    collector_311 = DataCollector(
+        endpoint=ENDPOINT,
+        filters=filters,
+        columns=columns,
+        date_col="created_date",
+    )
+    collector_311.collect_data(years=year_range)
+    collector_311.to_csv("nyc_311_pothole.csv")
 
 
 if __name__ == "__main__":
