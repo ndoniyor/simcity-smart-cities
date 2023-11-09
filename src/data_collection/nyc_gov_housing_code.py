@@ -19,6 +19,7 @@ def main():
         "approveddate",
         "violationstatus",
         "currentstatus",
+        "currentstatusdate"
     ]
 
     collector_housing = DataCollector(
