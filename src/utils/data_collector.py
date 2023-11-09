@@ -1,7 +1,11 @@
 from os import getenv
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pandas import DataFrame, concat, read_csv
 from dotenv import load_dotenv
 from sodapy import Socrata
+
+from utils import helpers
 
 DOMAIN = "data.cityofnewyork.us"
 CSV_FILE_PATH = "../../data/raw/"
@@ -11,40 +15,62 @@ app_token = getenv("SOCRATA_TOKEN")
 
 
 class DataCollector:
-    def __init__(self, endpoint=""):
+    def __init__(self, endpoint="", filters=[], columns=[], date_col=""):
         self.endpoint = endpoint
+        self.filters = filters
+        self.columns = columns
+        self.date_col = date_col
+        self.client = Socrata(domain=DOMAIN, app_token=app_token, timeout=10)
         self.df = DataFrame()
 
-    def collect_data(self, queries=[], select=[]) -> None:
+    def _collect_data_for_year(self, year) -> DataFrame:
+        query = self.filters + helpers.create_yearly_query(year, self.date_col)
+        query = " AND ".join(query)
+        select_str = ", ".join(self.columns) if self.columns else "*"
         dfs = []
         limit = 5000
         offset = 0
 
-        client = Socrata(domain=DOMAIN, app_token=app_token, timeout=10)
+        while True:
+            page_results = self.client.get(
+                self.endpoint,
+                where=query,
+                select=select_str,
+                limit=limit,
+                offset=offset,
+            )
+            if not page_results:
+                break
+            print(f"{year} - {offset} records", flush=True)
+            dfs.append(DataFrame(page_results))
+            offset += limit
 
-        query = " AND ".join(queries) if queries else None
+        return concat(dfs, ignore_index=True)
 
-        select_str = ", ".join(select) if select else "*"
+    def collect_data(self, years=[]) -> None:
+        start = time.time()
+        with ThreadPoolExecutor(max_workers=len(years)) as executor:
+            future_to_year = {
+                executor.submit(self._collect_data_for_year, year): year
+                for year in years
+            }
+            dfs = []
+            for future in as_completed(future_to_year):
+                year = future_to_year[future]
+                try:
+                    df = future.result()
+                    dfs.append(df)
+                except Exception as error:
+                    print(f"{year} generated an exception: {error}")
 
-        try:
-            while True:
-                print(f"{offset} records")
-                page_results = client.get(
-                    self.endpoint,
-                    where=query if query else None,
-                    select=select_str if select else None,
-                    limit=limit,
-                    offset=offset,
-                )
-
-                if not page_results:
-                    break
-
-                dfs.append(DataFrame(page_results))
-                offset += limit
-            self.df = concat(dfs, ignore_index=True)
-        except ValueError as error:
-            print("Could not find any files")
+        self.df = concat(dfs, ignore_index=True) if dfs else DataFrame()
+        end = time.time()
+        print(
+            f"""
+            File size: {helpers.compute_filesize(self.df)} MB
+            Operation took {end- start} seconds
+            """
+        )
 
     def read_data(self, name) -> None:
         file_path = CSV_FILE_PATH + name + ".csv"
