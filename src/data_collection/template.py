@@ -6,7 +6,7 @@ sys.path.append("..")
 from utils.data_collector import DataCollector
 import utils.helpers as helpers
 
-ENDPOINT = 
+ENDPOINT = ""
 
 
 def main():
