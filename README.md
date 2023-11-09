@@ -26,3 +26,20 @@ Scripts to pull data are located in `src/data_collection/`:
 python <name_of_script>.py
 ```
 * This will pull the data and put it into a csv file in `data/raw/`
+
+## Datasets
+
+### Base (User data)
+* [General 311 requests (2010 - Present)](https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9)
+* [Housing maintenance code complaints (reported)](https://data.cityofnewyork.us/Housing-Development/Housing-Maintenance-Code-Complaints/uwyv-629c)
+
+### Validation (Gov't data)
+* [Pothole work orders](https://data.cityofnewyork.us/Transportation/Street-Pothole-Work-Orders-Closed-Dataset-/x9wy-ing4)
+* [Vacant lot cleaning](https://data.cityofnewyork.us/City-Government/Lot-Cleaning-Dispositions-No-Longer-Maintained-/r4c5-ndkx)
+* [Parking violations](https://data.cityofnewyork.us/City-Government/Open-Parking-and-Camera-Violations/nc67-uf89)
+* [Plowing data](https://data.cityofnewyork.us/view/34hf-h2fw)
+* [Housing maintenance code violations (actual)](https://data.cityofnewyork.us/Housing-Development/Housing-Maintenance-Code-Violations/wvxf-dwi5)
+
+
+
+
