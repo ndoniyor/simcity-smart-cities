@@ -60,3 +60,17 @@ Currently aligned data:
 |--|--|--|
 |General 311 requests (pothole requests only) | Pothole work orders | `src/data_processing/align_pothole.ipynb`|
 |Housing code complaints | Housing code violations | `src/data_processing/align_housing_code.ipynb`|
+
+## To-Do
+
+- [ ] Experiment with Left/Right/Inner/Outer Joins to find out more about the data
+  - [ ] Organize by:
+    - Left with no right (No government action to citizen report)
+    - Right wit no left (Government action without citizen report)
+    - Both (User report and government action)
+- [ ] Fix alignment of housing code to include open violations
+- [ ] Align all data
+- [ ] Causality Analysis
+  - [ ] What causes under/overreporting?
+- [ ] Describe regions by socioeconomic status
+  - [ ] Use Census data
