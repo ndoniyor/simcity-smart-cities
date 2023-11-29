@@ -8,7 +8,7 @@ ENDPOINT = "erm2-nwe9"
 
 
 def main():
-    year_range = range(2010, 2023)
+    year_range = range(2010, 2024)
 
     columns = [
         "unique_key",
@@ -35,7 +35,6 @@ def main():
     ]
     filters = [
         "descriptor='Pothole'",
-        "resolution_description='The Department of Transportation inspected this complaint and repaired the problem.'",
     ]
 
     collector_311 = DataCollector(
