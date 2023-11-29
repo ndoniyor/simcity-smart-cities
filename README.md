@@ -66,9 +66,9 @@ Currently aligned data:
 - [ ] Experiment with Left/Right/Inner/Outer Joins to find out more about the data
   - [ ] Organize by:
     - Left with no right (No government action to citizen report)
-    - Right wit no left (Government action without citizen report)
+    - Right with no left (Government action without citizen report)
     - Both (User report and government action)
-- [ ] Fix alignment of housing code to include open violations
+- [ ] Fix alignment of housing code to include open violations - **IN PROGRESS**
 - [ ] Align all data
 - [ ] Causality Analysis
   - [ ] What causes under/overreporting?
