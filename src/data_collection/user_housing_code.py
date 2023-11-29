@@ -20,12 +20,13 @@ def main():
 
     collector_housing = DataCollector(
         endpoint=ENDPOINT,
-        filters=["status='CLOSE'"],
+        #filters=["status='CLOSE'"],
+        filters=[],
         columns=columns,
         date_col="statusdate",
     )
     collector_housing.collect_data(years=year_range)
-    collector_housing.df.to_csv("../../data/raw/nyc_user_housing_violation.csv")
+    collector_housing.df.to_csv("../../data/raw/nyc_user_housing_violation_no_filter.csv")
 
 
 if __name__ == "__main__":
