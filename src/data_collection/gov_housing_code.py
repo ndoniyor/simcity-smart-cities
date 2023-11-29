@@ -24,13 +24,14 @@ def main():
 
     collector_housing = DataCollector(
         endpoint=ENDPOINT,
-        filters=["violationstatus='Close'"],
+        #filters=["violationstatus='Close'"],
+        filters = [],
         columns=columns,
         date_col="currentstatusdate",
     )
     collector_housing.collect_data(years=year_range)
 
-    collector_housing.to_csv("../../data/raw/nyc_gov_housing_violation.csv")
+    collector_housing.to_csv("../../data/raw/nyc_gov_housing_violation_no_filter.csv")
 
 
 if __name__ == "__main__":
