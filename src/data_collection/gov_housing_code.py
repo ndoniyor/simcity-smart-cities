@@ -9,25 +9,15 @@ ENDPOINT = "wvxf-dwi5"
 
 
 def main():
-    year_range = range(2010, 2023)
+    year_range = range(2010, 2024)
 
-    columns = [
-        "violationid",
-        "buildingid",
-        "apartment",
-        "inspectiondate",
-        "approveddate",
-        "violationstatus",
-        "currentstatus",
-        "currentstatusdate"
-    ]
+    columns = ["inspectiondate", "block"]
 
     collector_housing = DataCollector(
         endpoint=ENDPOINT,
-        #filters=["violationstatus='Close'"],
-        filters = [],
+        filters=[],
         columns=columns,
-        date_col="currentstatusdate",
+        date_col="inspectiondate",
     )
     collector_housing.collect_data(years=year_range)
 
