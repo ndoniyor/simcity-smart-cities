@@ -8,3 +8,6 @@ pyenv.cfg
 simcity_env/
 src/data_collection/*.ipynb
 src/data_processing/clean_311.ipynb
+
+data_collection
+data_collection/*
