@@ -2,6 +2,9 @@
 
 This project focuses on analyzing data from the city of New York to derive insights on various city services, using datasets fetched via the sodapy API. Analyses are performed using Python libraries such as `pandas`, `geopandas`, `numpy`, and `matplotlib`.
 
+The goal of this is project is to explore differences between what citizens report and what actions the government takes. We want to see if there's a connection between how quickly and how much the government responds, and the demographics of different areas. This will help us better understand how well the government's responses match up with what citizens are reporting. 
+
+
 ## Getting Started
 
 - Clone repository
@@ -41,35 +44,38 @@ python <name_of_script>.py
 
 ### Base (User data)
 
+#### New York
+
 - [General 311 requests (2010 - Present)](https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9)
 - [Housing maintenance code complaints (reported)](https://data.cityofnewyork.us/Housing-Development/Housing-Maintenance-Code-Complaints/uwyv-629c)
 
+#### Chicago
+
+- [311 service requests](https://data.cityofchicago.org/Service-Requests/311-Service-Requests/v6vf-nfxy/about_data)
+
 ### Validation (Gov't data)
 
+#### New York
+
 - [Pothole work orders](https://data.cityofnewyork.us/Transportation/Street-Pothole-Work-Orders-Closed-Dataset-/x9wy-ing4)
-- [Vacant lot cleaning](https://data.cityofnewyork.us/City-Government/Lot-Cleaning-Dispositions-No-Longer-Maintained-/r4c5-ndkx)
 - [Housing maintenance code violations (actual)](https://data.cityofnewyork.us/Housing-Development/Housing-Maintenance-Code-Violations/wvxf-dwi5)
 
-## Data alignment
+#### Chicago
 
-The data here needs to be aligned, so that we can validate user requests against the government provided data
-Currently aligned data:
-| Base set | Validation set | Alignment File |
-|----------|----------------|----------------|
-|General 311 requests (pothole requests only) | Pothole work orders | `src/data_processing/align_pothole.ipynb`|
-|Housing code complaints | Housing code violations | `src/data_processing/align_housing_code.ipynb`|
+- [Potholes Patched](https://data.cityofchicago.org/Transportation/Potholes-Patched/wqdh-9gek/about_data)
+- [Vacant and Abandoned Buildings - Violations](https://data.cityofchicago.org/Buildings/Vacant-and-Abandoned-Buildings-Violations/kc9i-wq85/about_data)
 
 ## To-Do
 
-- [ ] Join aggregated data with census data
+- [ ] Add census data to NYC data
   - [ ] [Census data](https://www.nyc.gov/site/planning/planning-level/nyc-population/2020-census.page)
   - [ ] Census data organized by census tracts, the following additions need to made to make joining easy:
-    - [ ] Add census tract to pothole dataset
-    - [ ] Add census tract to housing code dataset
-    - [ ] Add census tract to parking dataset
-    - [ ] Add census tract to vacant lot dataset
-- [ ] Write a problem statement; clearly specify what the data will address
-- [ ] Find another set for parking issues
-  - [Collection of issued tickets](https://data.cityofnewyork.us/browse?Data-Collection_Data-Collection=DOF+Parking+Violations+Issued&q=&sortBy=alpha&utf8=%E2%9C%93)
+    - [x] Add census tract to pothole dataset
+    - [x] Add census tract to housing code dataset
+- [x] Look for other datasets from other cities
+- [ ] Add census data to Chicago data
+  - [ ] Cross-reference coordinates of 311/gov data to assign census tract numbers from census shapefile
+  - [ ] Use census API to batch assign census data
+- [x] Write a problem statement; clearly specify what the data will address
 - [ ] Causality Analysis
   - [ ] What causes under/overreporting?
