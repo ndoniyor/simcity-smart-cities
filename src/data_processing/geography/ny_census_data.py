@@ -10,6 +10,7 @@ census_geography_df = pd.read_csv(Paths.RAW_DATA_CSV / "census_tracts.csv")
 
 demographic_column_mapping = {
     "GeoID": "geo_id",
+    "Pop1" : "population",
     "BCT2020": "bct_num",
     # age
     "MdAge": "median_age",
