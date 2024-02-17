@@ -15,6 +15,7 @@ class Paths:
     RAW_DATA_CSV = RAW_DATA_BASE / "csv"
     RAW_DATA_XLSX = RAW_DATA_BASE / "xlsx"
     RAW_DATA_PARQUET = RAW_DATA_BASE / "parquet"
+    RAW_DATA_JSON = RAW_DATA_BASE / "json"
 
 
 class Urls:
