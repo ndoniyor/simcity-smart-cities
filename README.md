@@ -55,6 +55,7 @@ python <name_of_script>.py
 
 #### San Franciso 
 - [311 service requests] (https://data.sfgov.org/widgets/vw6y-z8j6?mobile_redirect=true)
+- https://data.sfgov.org/City-Infrastructure/311-Cases/vw6y-z8j6/explore/query/SELECT%0A%20%20%60service_request_id%60%2C%0A%20%20%60requested_datetime%60%2C%0A%20%20%60closed_date%60%2C%0A%20%20%60updated_datetime%60%2C%0A%20%20%60status_description%60%2C%0A%20%20%60status_notes%60%2C%0A%20%20%60agency_responsible%60%2C%0A%20%20%60service_name%60%2C%0A%20%20%60service_subtype%60%2C%0A%20%20%60service_details%60%2C%0A%20%20%60address%60%2C%0A%20%20%60street%60%2C%0A%20%20%60supervisor_district%60%2C%0A%20%20%60neighborhoods_sffind_boundaries%60%2C%0A%20%20%60police_district%60%2C%0A%20%20%60lat%60%2C%0A%20%20%60long%60%2C%0A%20%20%60point%60%2C%0A%20%20%60point_geom%60%2C%0A%20%20%60source%60%2C%0A%20%20%60media_url%60%2C%0A%20%20%60bos_2012%60%2C%0A%20%20%60data_as_of%60%2C%0A%20%20%60data_loaded_at%60%2C%0A%20%20%60%3A%40computed_region_6qbp_sg9q%60%2C%0A%20%20%60%3A%40computed_region_qgnn_b9vv%60%2C%0A%20%20%60%3A%40computed_region_26cr_cadq%60%2C%0A%20%20%60%3A%40computed_region_ajp5_b2md%60%2C%0A%20%20%60%3A%40computed_region_rxqg_mtj9%60%2C%0A%20%20%60%3A%40computed_region_yftq_j783%60%2C%0A%20%20%60%3A%40computed_region_jx4q_fizf%60%2C%0A%20%20%60%3A%40computed_region_bh8s_q3mv%60%2C%0A%20%20%60%3A%40computed_region_p5aj_wyqh%60%2C%0A%20%20%60%3A%40computed_region_fyvs_ahh9%60%2C%0A%20%20%60%3A%40computed_region_f58d_8dbm%60%2C%0A%20%20%60%3A%40computed_region_9dfj_4gjx%60%2C%0A%20%20%60%3A%40computed_region_vtsz_7cme%60%2C%0A%20%20%60%3A%40computed_region_n4xg_c4py%60%2C%0A%20%20%60%3A%40computed_region_sruu_94in%60%2C%0A%20%20%60%3A%40computed_region_4isq_27mq%60%2C%0A%20%20%60%3A%40computed_region_viu7_rrfi%60%2C%0A%20%20%60%3A%40computed_region_fcz8_est8%60%2C%0A%20%20%60%3A%40computed_region_pigm_ib2e%60%2C%0A%20%20%60%3A%40computed_region_9jxd_iqea%60%2C%0A%20%20%60%3A%40computed_region_6ezc_tdp2%60%2C%0A%20%20%60%3A%40computed_region_6pnf_4xz7%60%2C%0A%20%20%60%3A%40computed_region_h4ep_8xdi%60%2C%0A%20%20%60%3A%40computed_region_nqbw_i6c3%60%2C%0A%20%20%60%3A%40computed_region_2dwj_jsy4%60%2C%0A%20%20%60%3A%40computed_region_y6ts_4iup%60%2C%0A%20%20%60%3A%40computed_region_jwn9_ihcz%60/page/filter (alt link)
 
 ### Validation (Gov't data)
 
@@ -70,6 +71,7 @@ python <name_of_script>.py
 
 #### San Franciso 
 - [Housing maintenance code violations] (https://data.sfgov.org/Housing-and-Buildings/Notices-of-Violation-issued-by-the-Department-of-B/nbtm-fbw5/about_data)
+https://data.sfgov.org/Housing-and-Buildings/Department-of-Building-Inspection-Complaints-All-D/gm2e-bten/about_data
 
 ## To-Do
 
