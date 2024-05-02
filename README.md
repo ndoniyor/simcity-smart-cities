@@ -27,7 +27,7 @@ source ./simcity_env/bin/activate
 pip install -r requirements.txt
 ```
 
-## Gathering data
+## Gathering data [DEPRECATED]
 
 Scripts to pull data are located in `src/data_collection/`:
 
@@ -40,7 +40,62 @@ python <name_of_script>.py
 
 - This will pull the data and put it into a csv file in `data/raw/`
 
+
+## New Data Gathering
+OpenData API had too many issues with large data so we just pulled the data ourselves. Therefore the notebooks assume the data is already downloaded. I used the pathlib library, so as long as you have the data in the `data` folder in the root directory, the files should be found. Here are what each of the constants mean:
+
+```
+ROOT_PATH = Root project directory
+SRC_PATH = ROOT_PATH / "src"
+DATA_PATH = ROOT_PATH / "data"
+
+PROCESSED_DATA_BASE = DATA_PATH / "processed"
+PROCESSED_DATA_CSV = PROCESSED_DATA_BASE / "csv"
+PROCESSED_DATA_XLSX = PROCESSED_DATA_BASE / "xlsx"
+PROCESSED_DATA_PARQUET = PROCESSED_DATA_BASE / "parquet"
+
+RAW_DATA_BASE = DATA_PATH / "raw"
+RAW_DATA_CSV = RAW_DATA_BASE / "csv"
+RAW_DATA_XLSX = RAW_DATA_BASE / "xlsx"
+RAW_DATA_PARQUET = RAW_DATA_BASE / "parquet"
+RAW_DATA_JSON = RAW_DATA_BASE / "json"
+```
+
+Since the processed data is provided, you can pick up from the `data_analysis` folder
+
 ## Datasets
+
+### Schema
+The base datasets have data dictionaries that can be found in the portals. But the following is the data dictionary of the pothole data used for the causality analysis
+
+```json
+{
+  "borough": "Borough of complaint",
+  "neighborhood": "Neighborhood of complaint (based on census dataset)",
+  "street": "Street of complaint (this is either an intersection of 2 streets, or a main street bounded by 2 other streets)",
+  "year_month": "MM/YYYY date of complaint group",
+  "report_count": "Number of reports in grouped 'year_month' + 'street' combination",
+  "rating": "Ground truth street condition rating (from street pavement ratings dataset)",
+  "population_density": "Population density (population / area) of the CENSUS BLOCK",
+  "street_length": "Length of street the sidewalk is on",
+  "geometry": "Coordinates of pothole group (centroid)",
+  "median_age": "Median age of CENSUS BLOCK of CENSUS BLOCK of street",
+  "hispanic_pct": "Percentage of hispanic residents of CENSUS BLOCK of street",
+  "white_nh_pct": "Percentage of white (non:hispanic) residents of CENSUS BLOCK of street",
+  "black_nh_pct": "Percentage of black (non:hispanic) residents of CENSUS BLOCK of street",
+  "asian_nh_pct": "Percentage of asian (non:hispanic) residents of CENSUS BLOCK of street",
+  "average_hh_size": "Average househild size of CENSUS BLOCK of street",
+  "less_than_hs_pct": "Percentage of residents with less than high school degree of CENSUS BLOCK of street",
+  "hs_pct": "Percentage of residents with  high school degree of CENSUS BLOCK of street",
+  "some_college_pct": "Percentage of residents with some college experience of CENSUS BLOCK of street",
+  "associate_degree_pct": "Percentage of residents with associate's degree of CENSUS BLOCK of street",
+  "bachelors_or_higher_pct": "Percentage of residents with bachelor's degree of CENSUS BLOCK of street",
+  "median_household_income": "Median household income of CENSUS BLOCK of street",
+  "reporting_ratio": "Number of reports per group normalized by population_density and street length",
+  "normalized_reporting_ratio": "Same as before but mapped to 0: 10 range",
+  "reporting_difference": "Difference of 'normalized_reporting_ratio' and 'rating', represnts over/underreporting rate"
+}
+```
 
 ### Base (User data)
 
@@ -54,8 +109,7 @@ python <name_of_script>.py
 - [311 service requests](https://data.cityofchicago.org/Service-Requests/311-Service-Requests/v6vf-nfxy/about_data)
 
 #### San Franciso 
-- [311 service requests] (https://data.sfgov.org/widgets/vw6y-z8j6?mobile_redirect=true)
-- https://data.sfgov.org/City-Infrastructure/311-Cases/vw6y-z8j6/explore/query/SELECT%0A%20%20%60service_request_id%60%2C%0A%20%20%60requested_datetime%60%2C%0A%20%20%60closed_date%60%2C%0A%20%20%60updated_datetime%60%2C%0A%20%20%60status_description%60%2C%0A%20%20%60status_notes%60%2C%0A%20%20%60agency_responsible%60%2C%0A%20%20%60service_name%60%2C%0A%20%20%60service_subtype%60%2C%0A%20%20%60service_details%60%2C%0A%20%20%60address%60%2C%0A%20%20%60street%60%2C%0A%20%20%60supervisor_district%60%2C%0A%20%20%60neighborhoods_sffind_boundaries%60%2C%0A%20%20%60police_district%60%2C%0A%20%20%60lat%60%2C%0A%20%20%60long%60%2C%0A%20%20%60point%60%2C%0A%20%20%60point_geom%60%2C%0A%20%20%60source%60%2C%0A%20%20%60media_url%60%2C%0A%20%20%60bos_2012%60%2C%0A%20%20%60data_as_of%60%2C%0A%20%20%60data_loaded_at%60%2C%0A%20%20%60%3A%40computed_region_6qbp_sg9q%60%2C%0A%20%20%60%3A%40computed_region_qgnn_b9vv%60%2C%0A%20%20%60%3A%40computed_region_26cr_cadq%60%2C%0A%20%20%60%3A%40computed_region_ajp5_b2md%60%2C%0A%20%20%60%3A%40computed_region_rxqg_mtj9%60%2C%0A%20%20%60%3A%40computed_region_yftq_j783%60%2C%0A%20%20%60%3A%40computed_region_jx4q_fizf%60%2C%0A%20%20%60%3A%40computed_region_bh8s_q3mv%60%2C%0A%20%20%60%3A%40computed_region_p5aj_wyqh%60%2C%0A%20%20%60%3A%40computed_region_fyvs_ahh9%60%2C%0A%20%20%60%3A%40computed_region_f58d_8dbm%60%2C%0A%20%20%60%3A%40computed_region_9dfj_4gjx%60%2C%0A%20%20%60%3A%40computed_region_vtsz_7cme%60%2C%0A%20%20%60%3A%40computed_region_n4xg_c4py%60%2C%0A%20%20%60%3A%40computed_region_sruu_94in%60%2C%0A%20%20%60%3A%40computed_region_4isq_27mq%60%2C%0A%20%20%60%3A%40computed_region_viu7_rrfi%60%2C%0A%20%20%60%3A%40computed_region_fcz8_est8%60%2C%0A%20%20%60%3A%40computed_region_pigm_ib2e%60%2C%0A%20%20%60%3A%40computed_region_9jxd_iqea%60%2C%0A%20%20%60%3A%40computed_region_6ezc_tdp2%60%2C%0A%20%20%60%3A%40computed_region_6pnf_4xz7%60%2C%0A%20%20%60%3A%40computed_region_h4ep_8xdi%60%2C%0A%20%20%60%3A%40computed_region_nqbw_i6c3%60%2C%0A%20%20%60%3A%40computed_region_2dwj_jsy4%60%2C%0A%20%20%60%3A%40computed_region_y6ts_4iup%60%2C%0A%20%20%60%3A%40computed_region_jwn9_ihcz%60/page/filter (alt link)
+- [311 service requests](https://data.sfgov.org/widgets/vw6y-z8j6?mobile_redirect=true)
 
 ### Validation (Gov't data)
 
@@ -72,19 +126,3 @@ python <name_of_script>.py
 #### San Franciso 
 - [Housing maintenance code violations] (https://data.sfgov.org/Housing-and-Buildings/Notices-of-Violation-issued-by-the-Department-of-B/nbtm-fbw5/about_data)
 https://data.sfgov.org/Housing-and-Buildings/Department-of-Building-Inspection-Complaints-All-D/gm2e-bten/about_data
-
-## To-Do
-
-- [ ] Add census data to NYC data
-  - [ ] [Census data](https://www.nyc.gov/site/planning/planning-level/nyc-population/2020-census.page)
-  - [ ] Census data organized by census tracts, the following additions need to made to make joining easy:
-    - [x] Add census tract to pothole dataset
-    - [x] Add census tract to housing code dataset
-- [x] Look for other datasets from other cities
-- [ ] Add census data to Chicago data
-  - [ ] Cross-reference coordinates of 311/gov data to assign census tract numbers from census shapefile
-  - [ ] Use census API to batch assign census data
-- [x] Write a problem statement; clearly specify what the data will address
-- [ ] Causality Analysis
-  - [ ] What causes under/overreporting?
-
