@@ -42,7 +42,11 @@ python <name_of_script>.py
 
 
 ## New Data Gathering
-OpenData API had too many issues with large data so we just pulled the data ourselves. Therefore the notebooks assume the data is already downloaded. I used the pathlib library, so as long as you have the data in the `data` folder in the root directory, the files should be found. Here are what each of the constants mean:
+OpenData API had too many issues with large data so we just pulled the data ourselves. Therefore the notebooks assume the data is already downloaded. 
+
+So to start extract the data archive to a `data` folder in the base root of the directory or the `DATA_PATH` shown below.
+
+I used `pathlib` to make directory constants to make things simpler, here's what they mean:
 
 ```
 ROOT_PATH = Root project directory
